@@ -9,13 +9,13 @@ export const fetchTopStories = async () => {
     const response = await fetch(
       `${BASE_URL}/topstories/v2/home.json?api-key=${NY_TIMES_API_KEY}`
     );
-    
+
     if (!response.ok) {
       throw new Error('Failed to fetch top stories');
     }
-    
+
     const data = await response.json();
-    
+
     // Format the articles for our app
     return data.results.slice(0, 12).map(article => ({
       title: article.title,
@@ -37,13 +37,13 @@ export const searchArticles = async (query) => {
     const response = await fetch(
       `${BASE_URL}/search/v2/articlesearch.json?q=${query}&api-key=${NY_TIMES_API_KEY}`
     );
-    
+
     if (!response.ok) {
       throw new Error('Failed to search articles');
     }
-    
+
     const data = await response.json();
-    
+
     // Format the articles for our app
     return data.response.docs.slice(0, 12).map(article => ({
       title: article.headline.main,
